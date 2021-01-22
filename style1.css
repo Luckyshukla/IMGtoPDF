@@ -1,0 +1,35 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+input{
+cursor: pointer;
+height: 115px;
+background-color: #d3b10b;
+margin-left: 14%;
+padding-top: 100px;
+padding-left: 32%;
+width: 43%;
+}
+#canvas{
+
+}
+h1 {
+    text-align: center;
+    padding-top: 79px;
+}
+p{
+  text-align: center;
+  margin-bottom: 150px;
+}
+i{
+  color:#d3b10b;
+
+}
+button {
+    cursor: pointer;
+    border-radius: 25px;
+    background-color: #d3b10b;
+    width: 93px;
+    margin-left: 13%;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="style1.css">
+    <meta name="viewport" content="width = device-width,initial-scale = 1.0">
+    <title>image to pdf</title>
+  </head>
+  <body>
+    <h1><i class="fal fa-images"></i>JPG to PDF</h1>
+    <p>The best web app to convert JPG to PDF</p>
+    <input type="file" id="imageFile"<i class="fal fa-chevron-square-down"></i>>
+    <button type="button" onclick="handleImageToPdf()">Download PDF</button>
+    <p>.</p>
+    <!-- <input type="file" id="imageFile"> -->
+    <canvas id="canvas" width="5000" height="4000"></canvas>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js" integrity="sha512-ToRWKKOvhBSS8EtqSflysM/S7v9bB9V0X3B1+E7xo7XZBEZCPL3VX5SFIp8zxY19r7Sz0svqQVbAOx+QcLQSAQ==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js" integrity="sha512-s/XK4vYVXTGeUSv4bRPOuxSDmDlTedEpMEcAQk0t/FMd9V6ft8iXdwSBxV0eD60c6w/tjotSlKu9J2AAW1ckTA==" crossorigin="anonymous"></script>
+  <script>
+    var imageFile = document.getElementById("imageFile")
+    var canvas = document.getElementById("canvas")
+    var button = document.getElementById('button')
+
+    function handleImageToPdf() {
+      html2canvas(canvas,{
+        onrendered:function(canvas) {
+          var imgData = canvas.toDataURL("image/png")
+
+          var doc = new jsPDF('p','mm')
+          doc.addImage(imgData,'png',10,10)
+          doc.save("image.pdf" )
+        }
+      })
+    }
+    var ctx = canvas.getContext("2d")
+    imageFile.addEventListener("change",handleImage,false)
+    function handleImage(e) {
+      console.log(e);
+
+      var reader =  new FileReader()
+      reader.onload = function (event) {
+        var image = new Image()
+        image.onload = function () {
+          canvas.width = image.width
+          canvas.height = canvas.height
+          ctx.drawImage(image,0,0)
+
+        }
+        image.src = event.target.result
+      }
+
+
+      reader.readAsDataURL(e.target.files[0])
+    }
+  </script>
+</html>
